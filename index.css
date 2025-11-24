@@ -1,0 +1,10 @@
+/* @tailwind directives removed as we are using CDN for stability */
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
