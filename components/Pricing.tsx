@@ -15,7 +15,7 @@ export const Pricing: React.FC = () => {
     'Emissão ilimitada de notas fiscais',
     'Backup automático do arquivo digital',
     'Entrega imediata após validação',
-    'Suporte especializado 24/7',
+    'Suporte especializado',
     'Processo 100% online e seguro'
   ];
 

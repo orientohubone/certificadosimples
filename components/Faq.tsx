@@ -30,11 +30,11 @@ export const Faq: React.FC = () => {
             <div className="space-y-3 mb-6">
               <div className="flex items-center gap-2 text-brand-600">
                 <Clock size={16} className="text-brand-500" />
-                <span className="text-sm font-medium">Resposta em até 2 minutos</span>
+                <span className="text-sm font-medium">Resposta em até 10 minutos</span>
               </div>
               <div className="flex items-center gap-2 text-brand-600">
                 <Shield size={16} className="text-brand-500" />
-                <span className="text-sm font-medium">Suporte especializado 24/7</span>
+                <span className="text-sm font-medium">Suporte especializado</span>
               </div>
             </div>
             

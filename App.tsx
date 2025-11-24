@@ -29,14 +29,42 @@ function App() {
             <p className="text-brand-100 text-lg mb-10">
               Garanta a segurança jurídica da sua empresa hoje mesmo. Processo validado e seguro.
             </p>
-            <motion.div
-            animate={{ scale: [1, 1.05, 1] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <button className="bg-white text-brand-600 hover:bg-brand-50 font-bold py-4 px-10 rounded-xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-200 text-lg">
-              Começar Agora
-            </button>
-          </motion.div>
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+              <motion.div
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <button className="bg-white text-brand-600 hover:bg-brand-50 font-bold py-4 px-10 rounded-xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-200 text-lg">
+                  Começar Agora
+                </button>
+              </motion.div>
+              
+              <div className="text-white text-center sm:text-left sm:border-l sm:border-l-white/30 sm:pl-8">
+                <p className="text-base font-semibold text-white mb-2">Precisando de um ERP que simplifica a sua gestão de vendas?</p>
+                <div className="relative inline-block">
+                  <motion.span
+                    className="absolute inset-0 rounded-lg border-2 border-green-400"
+                    animate={{ 
+                      boxShadow: [
+                        '0 0 0 0 rgba(34, 197, 94, 0.7)',
+                        '0 0 0 8px rgba(34, 197, 94, 0)',
+                        '0 0 0 0 rgba(34, 197, 94, 0)'
+                      ]
+                    }}
+                    transition={{ 
+                      duration: 2, 
+                      repeat: Infinity 
+                    }}
+                  />
+                  <button 
+                    onClick={() => window.open('https://vendasimples.com.br', '_blank')}
+                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg transition-all duration-200 shadow-lg relative z-10"
+                  >
+                    Conheça o VendaSimples
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </main>
