@@ -3,6 +3,7 @@ import { Section } from './Section';
 import { Button } from './Button';
 import { PLANS, COPY } from '../constants';
 import { Check, FileBadge } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export const Pricing: React.FC = () => {
   const a1Plan = PLANS.find(p => p.type === 'A1');
@@ -30,12 +31,23 @@ export const Pricing: React.FC = () => {
         <div className="space-y-6">
           <h3 className="text-2xl font-bold text-slate-900 mb-8">Por que escolher o e-CNPJ A1?</h3>
           {benefits.map((benefit, idx) => (
-            <div key={idx} className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent-500 flex items-center justify-center mt-0.5">
+            <motion.div 
+              key={idx} 
+              className="flex items-start gap-4"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1, duration: 0.5 }}
+            >
+              <motion.div 
+                className="flex-shrink-0 w-6 h-6 rounded-full bg-brand-500 flex items-center justify-center mt-0.5"
+                whileHover={{ scale: 1.2 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
                 <Check size={16} className="text-white" />
-              </div>
+              </motion.div>
               <p className="text-slate-700 text-lg leading-relaxed">{benefit}</p>
-            </div>
+            </motion.div>
           ))}
           <Button 
             size="lg" 
@@ -49,7 +61,13 @@ export const Pricing: React.FC = () => {
 
         {/* Right side - Pricing card */}
         <div className="relative">
-          <div className="relative flex flex-col p-8 rounded-3xl bg-white ring-2 ring-brand-500 shadow-xl shadow-brand-500/10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative flex flex-col p-8 rounded-3xl bg-white ring-2 ring-brand-500 shadow-xl shadow-brand-500/10"
+          >
             <div className="mb-6">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 bg-brand-100 text-brand-600">
                 <FileBadge size={24} />
@@ -62,16 +80,7 @@ export const Pricing: React.FC = () => {
               <span className="text-4xl font-bold text-slate-900">{a1Plan.price}</span>
               <span className="text-slate-500 text-sm font-medium ml-2">/ {a1Plan.validity}</span>
             </div>
-
-            <ul className="space-y-4 mb-8 flex-1">
-              {a1Plan.features.map((feature, idx) => (
-                <li key={idx} className="flex items-start gap-3">
-                  <Check size={18} className="text-accent-600 mt-0.5 shrink-0" />
-                  <span className="text-slate-600 text-sm">{feature}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          </motion.div>
 
           {/* Floating trust indicators */}
           <div className="absolute -bottom-6 -left-6 hidden lg:block">

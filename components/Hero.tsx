@@ -26,7 +26,7 @@ export const Hero: React.FC = () => {
   );
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-brand-50 via-white to-slate-50 pt-32 pb-24 lg:pt-40 lg:pb-32">
+    <section className="relative overflow-hidden bg-gradient-to-br from-brand-50 via-white to-slate-50 pt-32 pb-12 lg:pt-40 lg:pb-16">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-32 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-brand-500/20 blur-3xl" />
       </div>
@@ -161,11 +161,6 @@ export const Hero: React.FC = () => {
               </motion.div>
             </div>
           </div>
-        </div>
-
-        <div className="flex flex-col gap-3 text-center text-slate-500">
-          <span className="text-sm uppercase tracking-[0.3em]">Confiado por milhares</span>
-          <hr className="mx-auto h-px w-32 border-none bg-slate-200" />
         </div>
       </div>
     </section>
