@@ -100,7 +100,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: 'Mariana Costa',
     role: 'Contadora',
     company: 'Costa Contabilidade',
-    content: 'Indico para todos os meus clientes. A interface é limpa e o suporte resolve qualquer dúvida técnica.',
+    content: 'A velocidade da Certificado Simples é impressionante. Fizemos a renovação de toda a diretoria em uma tarde.',
     avatarUrl: 'https://picsum.photos/100/100?random=2'
   },
   {
@@ -108,7 +108,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: 'Carlos Eduardo',
     role: 'Advogado',
     company: 'Autônomo',
-    content: 'Precisava assinar um contrato urgente. Em menos de 30 minutos resolvi a compra e agendei a validação.',
+    content: 'A velocidade da Certificado Simples é impressionante. Fizemos a renovação de toda a diretoria em uma tarde.',
     avatarUrl: 'https://picsum.photos/100/100?random=3'
   }
 ];
