@@ -1,96 +1,173 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { motion } from 'framer-motion';
 import { Button } from './Button';
 import { COPY } from '../constants';
-import { ShieldCheck, Star } from 'lucide-react';
+import { ShieldCheck, Star, Play, CheckCircle2 } from 'lucide-react';
 
 export const Hero: React.FC = () => {
+  const titles = COPY.hero.dynamicTitles;
+  const [titleIndex, setTitleIndex] = useState(0);
+
+  useEffect(() => {
+    if (!titles?.length) return;
+    const interval = setInterval(() => {
+      setTitleIndex((prev) => (prev + 1) % titles.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [titles?.length]);
+
+  const heroBadges = useMemo(
+    () => [
+      'Validação guiada por especialistas',
+      'Processo chancelado pelo ITI',
+      'Segurança com dupla verificação'
+    ],
+    []
+  );
+
   return (
-    <div className="relative overflow-hidden bg-slate-50 pt-32 pb-20 lg:pt-40 lg:pb-28">
-      {/* Decorative background elements */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full z-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-brand-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl"></div>
+    <section className="relative overflow-hidden bg-gradient-to-br from-brand-50 via-white to-slate-50 pt-32 pb-24 lg:pt-40 lg:pb-32">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-32 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-brand-500/20 blur-3xl" />
       </div>
 
-      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-          
-          {/* Left Content */}
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-12 px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center space-x-2 bg-white py-2 px-4 rounded-full shadow-sm border border-slate-200 mb-8">
-              <span className="flex h-2 w-2 rounded-full bg-accent-500 animate-pulse"></span>
-              <span className="text-sm font-medium text-slate-600 tracking-wide uppercase">Processo 100% Online</span>
-            </div>
-            
-            <h1 className="text-4xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
-              {COPY.hero.headline.split(' ').slice(0, -2).join(' ')} 
-              <span className="text-brand-600 block mt-2">
-                {COPY.hero.headline.split(' ').slice(-2).join(' ')}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="mb-8 inline-flex items-center gap-2 rounded-full border border-brand-100 bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand-700 shadow-sm"
+            >
+              <span className="flex h-2 w-2 rounded-full bg-accent-500 animate-pulse" />
+              Certificado digital imediato
+            </motion.div>
+
+            <motion.h1
+              className="text-4xl font-bold leading-tight text-slate-900 md:text-5xl lg:text-6xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              Emissão profissional
+              <br />
+              <span className="text-brand-600">de Certificados</span>
+              <span className="relative mt-4 block min-h-[7rem] w-full overflow-hidden rounded-2xl px-2 py-4 md:min-h-[9rem] lg:min-h-[10rem]">
+                {titles.map((title, index) => (
+                  <motion.span
+                    key={title}
+                    className={`absolute inset-0 flex items-center text-brand-600 ${index === titleIndex ? 'font-semibold' : 'font-medium'}`}
+                    initial={{ opacity: 0, y: 110 }}
+                    animate={
+                      titleIndex === index
+                        ? { opacity: 1, y: 0 }
+                        : { opacity: 0, y: titleIndex > index ? -110 : 110 }
+                    }
+                    transition={{ type: 'spring', stiffness: 80, damping: 20 }}
+                  >
+                    {title}
+                  </motion.span>
+                ))}
               </span>
-            </h1>
-            
-            <p className="text-lg text-slate-600 mb-8 leading-relaxed max-w-lg">
+            </motion.h1>
+
+            <motion.p
+              className="mt-6 text-lg text-slate-600 md:text-xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
               {COPY.hero.subhead}
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 mb-10">
-              <Button size="lg" withIcon onClick={() => document.getElementById('pricing')?.scrollIntoView({behavior: 'smooth'})}>
+            </motion.p>
+
+            <motion.div
+              className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+            >
+              <Button
+                size="lg"
+                withIcon
+                onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                className="shadow-brand-500/30 shadow-lg"
+              >
                 {COPY.hero.cta}
               </Button>
-              <Button variant="outline" size="lg" onClick={() => document.getElementById('how-it-works')?.scrollIntoView({behavior: 'smooth'})}>
-                Entenda o processo
-              </Button>
-            </div>
+              <button
+                onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
+                className="inline-flex items-center justify-center text-base font-semibold text-slate-600 transition-colors hover:text-brand-600"
+              >
+                <Play className="mr-2 h-5 w-5" /> Ver demonstração
+              </button>
+            </motion.div>
 
-            <div className="flex items-center gap-4 text-sm font-medium text-slate-500">
+            <motion.div
+              className="mt-10 flex flex-wrap items-center gap-6 text-sm font-medium text-slate-500"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.35, duration: 0.6 }}
+            >
               <div className="flex -space-x-2">
                 {[1, 2, 3, 4].map((i) => (
-                  <img key={i} className="w-8 h-8 rounded-full border-2 border-white" src={`https://picsum.photos/50/50?random=${i + 10}`} alt="User" />
+                  <img
+                    key={i}
+                    className="h-10 w-10 rounded-full border-2 border-white object-cover shadow"
+                    src={`https://picsum.photos/56/56?random=${i + 20}`}
+                    alt="Cliente satisfeito"
+                  />
                 ))}
               </div>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1 text-slate-600">
                 <div className="flex text-yellow-400">
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} fill="currentColor" />
+                  {[...Array(5)].map((_, idx) => (
+                    <Star key={idx} size={16} fill="currentColor" />
+                  ))}
                 </div>
-                <span>{COPY.hero.trust}</span>
+                {COPY.hero.trust}
               </div>
+            </motion.div>
+
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              {heroBadges.map((badge) => (
+                <div key={badge} className="flex items-center gap-3 rounded-2xl border border-slate-100 bg-white/70 p-4 shadow-sm">
+                  <CheckCircle2 className="h-5 w-5 text-accent-500" />
+                  <p className="text-sm font-semibold text-slate-600">{badge}</p>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Right Visual */}
-          <div className="relative hidden lg:block">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/50 bg-slate-900 aspect-square max-h-[600px]">
-               {/* Simulating a Dashboard/Certificate Interface */}
-               <img 
-                src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?q=80&w=2938&auto=format&fit=crop" 
-                alt="Business Professional" 
-                className="object-cover w-full h-full opacity-80"
-               />
-               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
-               
-               {/* Floating Card Element */}
-               <div className="absolute bottom-10 left-10 right-10 bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-xl text-white">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 bg-brand-500 rounded-lg">
-                      <ShieldCheck size={24} className="text-white" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-lg">Certificado Validado</h3>
-                      <p className="text-slate-300 text-sm">Acesso Gov.br autorizado</p>
-                    </div>
-                  </div>
-                  <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                    <div className="h-full bg-accent-500 w-[100%]"></div>
-                  </div>
-               </div>
+          <div className="relative flex flex-col items-center">
+            <div className="relative flex items-center justify-center">
+              <motion.div
+                className="relative flex h-80 w-80 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-[0_35px_120px_rgba(2,132,199,0.45)]"
+                initial={{ opacity: 0, scale: 0.75 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <motion.span
+                  className="absolute inset-0 rounded-full bg-brand-500/30"
+                  animate={{ scale: [1, 1.25, 1.35], opacity: [0.35, 0.05, 0.35] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                />
+                <motion.span
+                  className="absolute inset-8 rounded-full border border-white/40"
+                  animate={{ rotate: [0, 10, -10, 0] }}
+                  transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+                />
+                <ShieldCheck size={128} className="relative z-10" />
+              </motion.div>
             </div>
           </div>
         </div>
+
+        <div className="flex flex-col gap-3 text-center text-slate-500">
+          <span className="text-sm uppercase tracking-[0.3em]">Confiado por milhares</span>
+          <hr className="mx-auto h-px w-32 border-none bg-slate-200" />
+        </div>
       </div>
-    </div>
+    </section>
   );
 };

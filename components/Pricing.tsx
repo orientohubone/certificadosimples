@@ -2,72 +2,94 @@ import React from 'react';
 import { Section } from './Section';
 import { Button } from './Button';
 import { PLANS, COPY } from '../constants';
-import { Check, FileBadge, Usb, Cloud } from 'lucide-react';
-
-const IconMap = {
-  FileBadge: FileBadge,
-  Usb: Usb,
-  Cloud: Cloud,
-};
+import { Check, FileBadge } from 'lucide-react';
 
 export const Pricing: React.FC = () => {
+  const a1Plan = PLANS.find(p => p.type === 'A1');
+
+  if (!a1Plan) return null;
+
+  const benefits = [
+    'Instalação em múltiplos dispositivos',
+    'Emissão ilimitada de notas fiscais',
+    'Backup automático do arquivo digital',
+    'Entrega imediata após validação',
+    'Suporte especializado 24/7',
+    'Processo 100% online e seguro'
+  ];
+
   return (
     <Section id="pricing" background="gray">
       <div className="text-center max-w-3xl mx-auto mb-16">
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{COPY.pricing.title}</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4" dangerouslySetInnerHTML={{ __html: COPY.pricing.title }} />
         <p className="text-lg text-slate-600">{COPY.pricing.subtitle}</p>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        {PLANS.map((plan) => {
-          const Icon = IconMap[plan.iconName];
-          
-          return (
-            <div 
-              key={plan.id} 
-              className={`relative flex flex-col p-8 rounded-3xl bg-white transition-all duration-300 ${
-                plan.highlight 
-                  ? 'ring-2 ring-brand-500 shadow-xl shadow-brand-500/10 scale-100 lg:scale-105 z-10' 
-                  : 'border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1'
-              }`}
-            >
-              {plan.highlight && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-600 text-white text-xs font-bold uppercase tracking-wide py-1 px-4 rounded-full">
-                  Mais Popular
-                </div>
-              )}
-
-              <div className="mb-6">
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${plan.highlight ? 'bg-brand-100 text-brand-600' : 'bg-slate-100 text-slate-600'}`}>
-                  <Icon size={24} />
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">{plan.name}</h3>
-                <p className="text-slate-500 text-sm min-h-[40px]">{plan.description}</p>
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        {/* Left side - Benefits list */}
+        <div className="space-y-6">
+          <h3 className="text-2xl font-bold text-slate-900 mb-8">Por que escolher o e-CNPJ A1?</h3>
+          {benefits.map((benefit, idx) => (
+            <div key={idx} className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent-500 flex items-center justify-center mt-0.5">
+                <Check size={16} className="text-white" />
               </div>
-
-              <div className="mb-6">
-                <span className="text-4xl font-bold text-slate-900">{plan.price}</span>
-                <span className="text-slate-500 text-sm font-medium ml-2">/ {plan.validity}</span>
-              </div>
-
-              <ul className="space-y-4 mb-8 flex-1">
-                {plan.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <Check size={18} className="text-accent-600 mt-0.5 shrink-0" />
-                    <span className="text-slate-600 text-sm">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <Button 
-                variant={plan.highlight ? 'primary' : 'outline'} 
-                fullWidth
-              >
-                Selecionar Plano
-              </Button>
+              <p className="text-slate-700 text-lg leading-relaxed">{benefit}</p>
             </div>
-          );
-        })}
+          ))}
+          <Button 
+            size="lg" 
+            withIcon 
+            className="mt-8"
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+          >
+            Falar com especialista
+          </Button>
+        </div>
+
+        {/* Right side - Pricing card */}
+        <div className="relative">
+          <div className="relative flex flex-col p-8 rounded-3xl bg-white ring-2 ring-brand-500 shadow-xl shadow-brand-500/10">
+            <div className="mb-6">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 bg-brand-100 text-brand-600">
+                <FileBadge size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">{a1Plan.name}</h3>
+              <p className="text-slate-500 text-sm min-h-[40px]">{a1Plan.description}</p>
+            </div>
+
+            <div className="mb-6">
+              <span className="text-4xl font-bold text-slate-900">{a1Plan.price}</span>
+              <span className="text-slate-500 text-sm font-medium ml-2">/ {a1Plan.validity}</span>
+            </div>
+
+            <ul className="space-y-4 mb-8 flex-1">
+              {a1Plan.features.map((feature, idx) => (
+                <li key={idx} className="flex items-start gap-3">
+                  <Check size={18} className="text-accent-600 mt-0.5 shrink-0" />
+                  <span className="text-slate-600 text-sm">{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Floating trust indicators */}
+          <div className="absolute -bottom-6 -left-6 hidden lg:block">
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-lg p-4">
+              <div className="flex items-center gap-3">
+                <div className="flex -space-x-2">
+                  {[1, 2, 3].map((i) => (
+                    <img key={i} className="w-8 h-8 rounded-full border-2 border-white" src={`https://picsum.photos/40/40?random=${i + 30}`} alt="Cliente" />
+                  ))}
+                </div>
+                <div className="text-sm">
+                  <p className="font-semibold text-slate-900">+15.000 empresas</p>
+                  <p className="text-slate-500">já confiam</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </Section>
   );

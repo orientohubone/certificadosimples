@@ -6,14 +6,25 @@ export const COPY = {
     headline: "Conquiste seu Certificado Digital em minutos",
     subhead: "A solução mais segura e desburocratizada para emitir seu e-CPF ou e-CNPJ. Validação simplificada e suporte especializado.",
     cta: "Emitir Agora",
-    trust: "Mais de 15.000 empresas certificadas"
+    trust: "Mais de 15.000 empresas certificadas",
+    dynamicTitles: [
+      "para empresas em expansão",
+      "com validação guiada",
+      "com segurança máxima",
+      "sem filas ou papelada"
+    ],
+    stats: [
+      { label: "Empresas atendidas", value: "15.000+" },
+      { label: "Tempo médio de emissão", value: "5 min" },
+      { label: "Especialistas disponíveis", value: "24/7" }
+    ]
   },
   features: {
     title: "Como funciona a emissão",
     subtitle: "Processo 100% otimizado para você não perder tempo."
   },
   pricing: {
-    title: "Escolha o modelo ideal",
+    title: "Certificado digital de forma <span class='text-brand-600'>simples</span>",
     subtitle: "Transparência total. Sem taxas escondidas."
   }
 };
