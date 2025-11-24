@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Section } from './Section';
 import { FAQS } from '../constants';
-import { Plus, Minus } from 'lucide-react';
+import { Plus, Minus, MessageCircle, Clock, Shield } from 'lucide-react';
 
 export const Faq: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -14,11 +14,33 @@ export const Faq: React.FC = () => {
           <p className="text-slate-600 text-lg mb-8">
             Não encontrou sua resposta? Nosso time de suporte está pronto para ajudar no chat.
           </p>
-          <div className="p-6 bg-brand-50 rounded-2xl border border-brand-100">
-            <h4 className="font-semibold text-brand-900 mb-2">Precisa de ajuda urgente?</h4>
-            <p className="text-brand-700 text-sm mb-4">Atendemos via WhatsApp em menos de 2 minutos.</p>
-            <button className="text-brand-600 font-semibold hover:underline text-sm">
-              Falar com atendente &rarr;
+          
+          <div className="p-6 bg-gradient-to-br from-brand-50 to-brand-100 rounded-2xl border border-brand-200 shadow-lg">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-12 h-12 bg-brand-500 rounded-xl flex items-center justify-center">
+                <MessageCircle className="text-white" size={24} />
+              </div>
+              <h4 className="font-bold text-brand-900 text-lg">Precisa de ajuda urgente?</h4>
+            </div>
+            
+            <p className="text-brand-700 text-sm mb-6 leading-relaxed">
+              Atendimento especializado via WhatsApp em menos de 2 minutos. Respostas rápidas para suas dúvidas.
+            </p>
+            
+            <div className="space-y-3 mb-6">
+              <div className="flex items-center gap-2 text-brand-600">
+                <Clock size={16} className="text-brand-500" />
+                <span className="text-sm font-medium">Resposta em até 2 minutos</span>
+              </div>
+              <div className="flex items-center gap-2 text-brand-600">
+                <Shield size={16} className="text-brand-500" />
+                <span className="text-sm font-medium">Suporte especializado 24/7</span>
+              </div>
+            </div>
+            
+            <button className="w-full bg-brand-500 text-white font-semibold py-3 px-6 rounded-xl hover:bg-brand-600 transition-colors flex items-center justify-center gap-2 shadow-md">
+              <MessageCircle size={20} />
+              Falar com atendente
             </button>
           </div>
         </div>

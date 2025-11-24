@@ -49,14 +49,19 @@ export const Pricing: React.FC = () => {
               <p className="text-slate-700 text-lg leading-relaxed">{benefit}</p>
             </motion.div>
           ))}
-          <Button 
-            size="lg" 
-            withIcon 
-            className="mt-8"
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+          <motion.div
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           >
-            Falar com especialista
-          </Button>
+            <Button 
+              size="lg" 
+              withIcon 
+              className="mt-8"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Falar com especialista
+            </Button>
+          </motion.div>
         </div>
 
         {/* Right side - Pricing card */}

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { Features } from './components/Features';
@@ -7,6 +6,7 @@ import { Testimonials } from './components/Testimonials';
 import { Faq } from './components/Faq';
 import { Footer } from './components/Footer';
 import { MessageCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 function App() {
   return (
@@ -29,9 +29,14 @@ function App() {
             <p className="text-brand-100 text-lg mb-10">
               Garanta a segurança jurídica da sua empresa hoje mesmo. Processo validado e seguro.
             </p>
+            <motion.div
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          >
             <button className="bg-white text-brand-600 hover:bg-brand-50 font-bold py-4 px-10 rounded-xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-200 text-lg">
               Começar Agora
             </button>
+          </motion.div>
           </div>
         </section>
       </main>

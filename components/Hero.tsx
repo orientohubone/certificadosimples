@@ -87,14 +87,19 @@ export const Hero: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.25 }}
             >
-              <Button
-                size="lg"
-                withIcon
-                onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
-                className="shadow-brand-500/30 shadow-lg"
+              <motion.div
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
               >
-                {COPY.hero.cta}
-              </Button>
+                <Button
+                  size="lg"
+                  withIcon
+                  onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="shadow-brand-500/30 shadow-lg"
+                >
+                  {COPY.hero.cta}
+                </Button>
+              </motion.div>
               <button
                 onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
                 className="inline-flex items-center justify-center text-base font-semibold text-slate-600 transition-colors hover:text-brand-600"
