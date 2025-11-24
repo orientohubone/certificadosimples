@@ -13,7 +13,7 @@ export const Testimonials: React.FC = () => {
 
       <div className="grid md:grid-cols-3 gap-8">
         {TESTIMONIALS.map((t) => (
-          <div key={t.id} className="bg-slate-800/50 p-8 rounded-2xl border border-slate-700 hover:bg-slate-800 transition-colors">
+          <div key={t.id} className="bg-slate-800/50 p-8 rounded-2xl border border-brand-500/50 hover:bg-slate-800 transition-colors">
             <Quote className="text-brand-500 mb-6 h-8 w-8 opacity-50" />
             <p className="text-slate-300 mb-8 italic leading-relaxed">"{t.content}"</p>
             <div className="flex items-center gap-4">
